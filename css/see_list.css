@@ -1,0 +1,42 @@
+
+/*清单列表的样式表*/
+@charset "gb2312";
+.small { font-family: "宋体"; font-size:  9pt; vertical-align: middle; line-height:16pt; background-color:#FFF}
+.topic { font-family: "宋体"; font-size: 11pt; vertical-align: middle; line-height:16pt;}
+
+table{ border="0";
+       cellspacing="0";
+	   cellpadding="0"}
+	   
+.mouse{
+	background-color:#3F9;}
+
+BODY {
+	COLOR: #000000; FONT-FAMILY: "宋体"; FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+TD {
+	COLOR:#000000; FONT-FAMILY: "宋体"; FONT-SIZE: 12px; TEXT-DECORATION: none;
+	text-align:center;
+}
+DIV {
+	COLOR: #000000; FONT-FAMILY: "宋体"; FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+A:link {
+	COLOR:#00F; FONT-FAMILY: "宋体"; FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #000000; FONT-FAMILY: "宋体"; FONT-SIZE: 12px; TEXT-DECORATION: underline
+}
+A:visited {
+	COLOR:#00F; FONT-FAMILY: "宋体"; FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #000000; FONT-FAMILY: "宋体"; FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+.h1 {
+	COLOR: #000000; FONT-FAMILY: "宋体"; FONT-SIZE: 12px; LETTER-SPACING: 3px; TEXT-DECORATION: none; TEXT-INDENT: 20px; VERTICAL-ALIGN: 500%
+}
+.listtd{
+	white-space: nowrap;
+    overflow: hidden
+}

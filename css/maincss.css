@@ -1,0 +1,47 @@
+@charset "utf-8";
+table#sellcalendar td,th{
+	width:100px;
+	height:55px;
+	padding:3px 5px;
+	font-weight:normal;
+	font-size:18px;
+	text-align:center;
+	font-weight:bold;
+	 -moz-border-radius: 8px;      /* Gecko browsers */
+    -webkit-border-radius: 8px;   /* Webkit browsers */
+    border-radius:8px;            /* W3C syntax */}
+table#sellcalendar th{
+	color:#FFF;
+	background-color:#6EA7D2;}
+table#sellcalendar td{
+	color:#ff6666;
+	background-color:#99CCCC;}
+span.daynumber{
+	font-size:26px;
+	color:#7d6666;}
+span.sellmoney{
+	color:#ffffcc;
+	font-size:28px}
+span.sellplan{
+	color:#ffffcc;
+	font-size:14px}
+#tabs div{
+	color:#165987;
+	font-size:20px;
+	font-weight:bold;}
+input.sellplans{
+	text-align:center;
+	width:80px;}
+.successtip{
+	color:#0C0;
+	font-size:20px;
+	font-weight:normal;}
+.errortip{
+	color:#C00;
+	font-size:12px;
+	font-weight:normal;}	
+span.emptysell{
+	color:#F00;
+	font-size:20px;}
+td.emptysell{
+	border:#F00 2px solid;}
