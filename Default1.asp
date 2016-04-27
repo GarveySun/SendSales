@@ -3,10 +3,7 @@ DBname="fxs"
 dim conn,rs
 Set conn=Server.CreateObject("ADODB.Connection")
 Set rs = Server.CreateObject("ADODB.Recordset")
-'strAddr = Server.MapPath("./files/"&request("filename"))
-'conn.open "Provider=Microsoft.ACE.OLEDB.12.0;Extended Properties=Excel 8.0;Data Source="&strAddr
-'sheetname=split(request("filename"),".")
-'sql = "Select * from ["&sheetname(0)&"$]"
+
 
 
 conn.open "DSN=fxs"
@@ -29,7 +26,7 @@ width:100px;
 </style>
 <script type="text/javascript">
 function save_confirm(){
-	if(confirm("È·ÈÏÒª±£´æËùÓĞĞŞ¸ÄÂğ£¿"))
+	if(confirm("ç¡®è®¤è¦ä¿å­˜æ‰€æœ‰ä¿®æ”¹å—ï¼Ÿ"))
 	{}
 	else
 	{return false;}
@@ -93,7 +90,7 @@ wend
 </form>
 </br>
 <div align="center">
-<button type="submit">submit±£´æ</button>
+<button type="submit">submitä¿å­˜</button>
 <button type="button" onClick="javascript:window.location.href='Default.asp?action=exit'">back</button>
 </div>
 </form>
