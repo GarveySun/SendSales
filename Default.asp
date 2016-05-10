@@ -10,6 +10,14 @@
 <title>每日速报</title>
 </head>
 <body>
+<div class="blackback">
+	<div class="pw_input">
+    	<p>请输入密码以写入数据库</p>
+        <input type="text" value="" class="pw" placeholder="请输入"><br />
+        <button type="button" class="pwbutton pwwrite" id="pwwrite">写入</button>
+        <button type="button" class="pwbutton pwcancel" id="pwcancel">取消</button>
+    </div>
+</div>
 <div id="tabs">
   <ul>
     <li><a href="#tabs-0">查看销售日历</a></li>
@@ -68,6 +76,8 @@
     月
     &nbsp;&nbsp;&nbsp;
     <button id="wsellplanbutton" type="button">保存修改</button>
+    <div class="msg"></div>
+    <div style="margin:5px">当月总销计划:<span class="monthplan"></span>万元。</div>
   </div>
 </div>
 <script type="text/javascript">
@@ -96,22 +106,49 @@ $( "#searchmonth" ).datepicker({
 });
 
 $(document).ready(function(e) {
+	//设定日期
 	setdate();
+	//查询首页销售日历
 	searchsellcalendar();
+	//查询本月销售计划
 	readsellplan();
+	//给查询单日销售按钮绑定跳转地址
     $("#search").click(function(e) {
 		var url="report.asp?selldate="+$("#searchdate").val()
         $("#form2").attr("action",url)
     });
+	//日期变化绑定重新查询事件
 	$("#year,#month").change(function(e) {
          searchsellcalendar();
     });
+	//日期变化绑定重新查询事件
 	$("#year2,#month2").change(function(e) {
         readsellplan();
     });
+	//给写销售计划按钮绑定事件
 	$("#wsellplanbutton").click(function(e) {
-		wsellplanbutton();
+		checkpw();
     });
+	//按钮绑定光标移动变化
+	$(".pwbutton").hover(function (e) {
+		$(this).addClass("pwhover")},function (e) {
+			$(this).removeClass("pwhover")
+	});
+	//给“取消”按钮绑定清除半透明层的事件
+	$("#pwcancel").on("click",function (e){
+		$("div.blackback").hide();
+	});
+	//给“写入”按钮绑定校验密码过程，密码采用单向不可逆算法加密
+	$("#pwwrite").on("click",function (e){
+		var inputpw = $("input.pw").val();
+		if (md5(inputpw) === "a8a29f5201d20b9a506a6a95003abcd7"){
+			wsellplanbutton();
+		}else{
+			$("div.msg").addClass("error").show();
+			$("div.msg").text("输入的密码有误，操作被拒绝");
+		}
+		$("div.blackback").hide();
+	});
 });
 </script>
 </body>

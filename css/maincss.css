@@ -1,4 +1,5 @@
 @charset "utf-8";
+body{margin:0px;}
 table#sellcalendar td,th{
 	width:100px;
 	height:55px;
@@ -29,19 +30,84 @@ span.sellplan{
 	color:#165987;
 	font-size:20px;
 	font-weight:bold;}
+div.sellplan_input{
+	color:#000;
+	border-radius:5px;
+	background:#99CCCC;
+	display:inline-block;
+	width:130px;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	margin:2px 2px}
 input.sellplans{
 	text-align:center;
-	width:80px;}
-.successtip{
-	color:#0C0;
-	font-size:20px;
-	font-weight:normal;}
-.errortip{
-	color:#C00;
-	font-size:12px;
-	font-weight:normal;}	
+	width:60px;}
+div.msg{
+	display:none;
+	border:solid #FC3 2px;
+	background:rgba(235,197,44,0.4);
+	color:#000;
+	width:100%;
+	padding:4px;
+	margin:4px;
+}
+.error{
+	border:solid #C33 2px !important;
+	background:rgba(255,0,0,0.4) !important;
+}
 span.emptysell{
 	color:#F00;
 	font-size:20px;}
 td.emptysell{
 	border:#F00 2px solid;}
+div.blackback{
+	display:none;
+	z-index:2;
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.4);
+	text-align:center;
+}
+div.pw_input{
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-100px 0 0 -150px;
+	background:#FFF;
+	border-radius:8px;
+	width:300px;
+	height:200px;
+	text-align:center;
+}
+div.pw_input p{
+	margin:30px;
+	font-size:18px;
+	font-weight:bold;
+	line-height:22px;
+	color:#000;
+}
+input.pw{
+	line-height:22px;
+}
+.pwbutton{
+	margin:20px 5px;
+	display:inline-block;
+	width: 75px;
+	height: 35px;
+	border-radius: 8px;
+	font-size: 14px;
+}
+.pwwrite{
+	background-color: #428bca;
+	border-color: #357ebd;
+	color:#FFF;
+}
+.pwcancel{
+	background-color: #FFF;
+	border:solid #666 1px;
+}
+.pwhover{
+	box-shadow: 0px 0px 10px #222;
+}
