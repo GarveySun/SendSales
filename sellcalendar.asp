@@ -1,16 +1,9 @@
 <!--#include file ="config.asp"-->
-<script language="jscript" runat="server">  
-Array.prototype.get = function(x) { return this[x]; };  
-function parseJSON(strJSON) { return eval("(" + strJSON + ")"); }  
-</script>  
 <%
-Dim json, obj  
-json = request("cdate")
-Set obj = parseJSON(json)  
 dim selldate(1)
-selldate(0)=obj.cyear
-selldate(1)=obj.cmonth
-
+selldate(0)=request("year")
+selldate(1)=request("month")
+response.Write(selldate(1))
 if selldate(1)=1 or selldate(1)=3 or selldate(1)=5 or selldate(1)=7 or selldate(1)=8 or selldate(1)=10 or selldate(1)=12 then
     endday = 31
 elseif selldate(1)=2 then
@@ -52,6 +45,7 @@ rs2.close
 conn.close
 j=weekday(cdate(selldate(0)&"/"&selldate(1)&"/1"),2)
 
+dim json
 json = "{""weekday"":"""&j&""",""endday"":"""&endday&""",""sellmoney"":["
 for i=0 to endday-1
   json = json & """"&sellmoney(i)&""","
@@ -65,7 +59,4 @@ json = Left(json,Len(json)-1)
 json = json & "]"
 json = json & "}"
 response.Write(json)
-
-
-Set obj = Nothing  
 %>

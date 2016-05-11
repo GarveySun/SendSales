@@ -1,15 +1,9 @@
 <!--#include file ="config.asp"-->
-<script language="jscript" runat="server">  
-Array.prototype.get = function(x) { return this[x]; };  
-function parseJSON(strJSON) { return eval("(" + strJSON + ")"); }  
-</script>  
 <%
-Dim json, obj  
-json = request("sdate")
-Set obj = parseJSON(json)  
+Dim json
 dim selldate(1)
-selldate(0)=obj.syear
-selldate(1)=obj.smonth
+selldate(0)=request("year")
+selldate(1)=request("month")
 
 if selldate(1)=1 or selldate(1)=3 or selldate(1)=5 or selldate(1)=7 or selldate(1)=8 or selldate(1)=10 or selldate(1)=12 then
     endday = 31

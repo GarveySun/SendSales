@@ -6,7 +6,7 @@
 <link href="css/maincss.css" rel="stylesheet">
 <script src="jquery/jquery-1.9.1.min.js"></script>
 <script src="jquery/jquery-ui.js"></script>
-<script src="js/mainjs.js"></script>
+
 <title>每日速报</title>
 </head>
 <body>
@@ -27,10 +27,10 @@
   </ul>
   <div id="tabs-0">
     <div> 查看其它月份：
-      <select id="year">
+      <select class="year" id="year">
       </select>
       年
-      <select id="month">
+      <select class="month" id="month">
       </select>
       月 </div>
     <table id="sellcalendar">
@@ -53,8 +53,7 @@
       <br />
       上传报表分析系统-销售查询-5查询专柜品牌销售 后基础转存成xls的数据表,先在本地用excel打开，保存一下，再上传: <br />
       <input type="file" name="pic" value="">
-      <br />
-      <button type="submit">upload</button>
+      <button class="button" type="submit">上传</button>
       <br />
     </form>
   </div>
@@ -63,93 +62,22 @@
       查询
       <input type="text" id="searchdate" value="<%=(date()-1)%>">
       号的销售。
-      <button id="search" type="submit">查询</button>
-      <br />
+      <button class="button" id="search" type="submit">查询</button>
     </form>
   </div>
   <div id="tabs-3"> 查看/录入月计划：
-    <select id="year2">
+    <select class="year" id="year2">
     </select>
     年
-    <select id="month2">
+    <select class="month" id="month2">
     </select>
     月
     &nbsp;&nbsp;&nbsp;
-    <button id="wsellplanbutton" type="button">保存修改</button>
+    <button id="wsellplanbutton" class="button" type="button">保存修改</button>
     <div class="msg"></div>
     <div style="margin:5px">当月总销计划:<span class="monthplan"></span>万元。</div>
   </div>
 </div>
-<script type="text/javascript">
- $(function() {
-            $.datepicker.regional["zh-CN"] = { closeText: "关闭", prevText: "&#x3c;上月", nextText: "下月&#x3e;", currentText: "今天", monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], monthNamesShort: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"], dayNames: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"], dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"], dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"], weekHeader: "周", dateFormat: "yy-mm-dd", firstDay: 1, isRTL: !1, showMonthAfterYear: !0, yearSuffix: "年" }
-            $.datepicker.setDefaults($.datepicker.regional["zh-CN"]);
-            var datePicker = $("#ctl00_BodyMain_txtDate").datepicker({
-                showOtherMonths: true,
-                selectOtherMonths: true            
-            });
-        });
-$( "#tabs" ).tabs();
-$( "#datepicker" ).datepicker({
-	inline: true,
-	dateFormat: "yy/m/d"
-});
-$( "#searchdate" ).datepicker({
-	inline: true,
-	dateFormat: "yy/m/d"
-});
-$( "#searchmonth" ).datepicker({
-	inline: true,
-	dateFormat: "yy/m",
-	changeYear:true,
-	changeMonth:true
-});
-
-$(document).ready(function(e) {
-	//设定日期
-	setdate();
-	//查询首页销售日历
-	searchsellcalendar();
-	//查询本月销售计划
-	readsellplan();
-	//给查询单日销售按钮绑定跳转地址
-    $("#search").click(function(e) {
-		var url="report.asp?selldate="+$("#searchdate").val()
-        $("#form2").attr("action",url)
-    });
-	//日期变化绑定重新查询事件
-	$("#year,#month").change(function(e) {
-         searchsellcalendar();
-    });
-	//日期变化绑定重新查询事件
-	$("#year2,#month2").change(function(e) {
-        readsellplan();
-    });
-	//给写销售计划按钮绑定事件
-	$("#wsellplanbutton").click(function(e) {
-		checkpw();
-    });
-	//按钮绑定光标移动变化
-	$(".pwbutton").hover(function (e) {
-		$(this).addClass("pwhover")},function (e) {
-			$(this).removeClass("pwhover")
-	});
-	//给“取消”按钮绑定清除半透明层的事件
-	$("#pwcancel").on("click",function (e){
-		$("div.blackback").hide();
-	});
-	//给“写入”按钮绑定校验密码过程，密码采用单向不可逆算法加密
-	$("#pwwrite").on("click",function (e){
-		var inputpw = $("input.pw").val();
-		if (md5(inputpw) === "a8a29f5201d20b9a506a6a95003abcd7"){
-			wsellplanbutton();
-		}else{
-			$("div.msg").addClass("error").show();
-			$("div.msg").text("输入的密码有误，操作被拒绝");
-		}
-		$("div.blackback").hide();
-	});
-});
-</script>
+<script src="js/mainjs.js"></script>
 </body>
 </html>
