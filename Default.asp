@@ -6,7 +6,7 @@
 <link href="css/maincss.css" rel="stylesheet">
 <script src="jquery/jquery-1.9.1.min.js"></script>
 <script src="jquery/jquery-ui.js"></script>
-
+<script src="js/config.js"></script>
 <title>每日速报</title>
 </head>
 <body>
@@ -18,12 +18,16 @@
         <button type="button" class="pwbutton pwcancel" id="pwcancel">取消</button>
     </div>
 </div>
+<div class="loading">
+	<img class="loading" src="css/images/load.gif" />
+</div>
 <div id="tabs">
   <ul>
     <li><a href="#tabs-0">查看销售日历</a></li>
     <li><a href="#tabs-1">上传销售数据</a></li>
     <li><a href="#tabs-2">查询销售报表</a></li>
     <li><a href="#tabs-3">录入销售计划</a></li>
+    <li><a href="#tabs-4">网络设备监测</a></li>
   </ul>
   <div id="tabs-0">
     <div> 查看其它月份：
@@ -52,7 +56,7 @@
       <input id="datepicker" type="text" name="selldate" value="<%=date()%>">
       <br />
       上传报表分析系统-销售查询-5查询专柜品牌销售 后基础转存成xls的数据表,先在本地用excel打开，保存一下，再上传: <br />
-      <input type="file" name="pic" value="">
+      <input type="file" name="pic" value=""><br />
       <button class="button" type="submit">上传</button>
       <br />
     </form>
@@ -77,6 +81,14 @@
     <div class="msg"></div>
     <div style="margin:5px">当月总销计划:<span class="monthplan"></span>万元。</div>
   </div>
+  
+	<div id="tabs-4">
+    	请选择区域：
+		<select class="swselect" id="swselect">
+        	<option value="all" selected>全部</option>
+    	</select>
+        <button id="swbutton" class="button" type="button">设备状态查询</button>
+	</div>
 </div>
 <script src="js/mainjs.js"></script>
 </body>

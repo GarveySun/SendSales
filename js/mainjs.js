@@ -24,6 +24,7 @@ $( "#searchmonth" ).datepicker({
 });
 $(".button").button();
 
+
 $(document).ready(function(e) {
 	
 	//设定日期选择框的option
@@ -32,6 +33,9 @@ $(document).ready(function(e) {
 	searchsellcalendar();
 	//查询本月销售计划
 	readsellplan();
+	//给网络状态监测增加选择项目
+	addswselect();
+	addswtable();
 	//给查询单日销售按钮绑定跳转地址
     $("#search").click(function(e) {
 		var url="report.asp?selldate="+$("#searchdate").val()
@@ -57,7 +61,9 @@ $(document).ready(function(e) {
 	});
 	//给“取消”按钮绑定清除半透明层的事件
 	$("#pwcancel,div.blackback").on("click",function (e){
-		$("div.blackback").hide();
+		if(event.target==this){
+			$("div.blackback").hide();
+		}
 	});
 	//给“写入”按钮绑定校验密码过程，密码采用单向不可逆算法加密
 	$("#pwwrite").on("click",function (e){
@@ -70,7 +76,74 @@ $(document).ready(function(e) {
 		}
 		$("div.blackback").hide();
 	});
+	$("#swselect").on("change",function (e){
+		addswtable();
+	});
+	
+	$("#swbutton").on("click",function(e){
+		 teltoswitch();
+	});
 });
+
+//循环从Switch对象中取出分组名称，添加进select
+function addswselect() {
+	for(var sw in Switch){
+		$("#swselect").append("<option calue=\""+sw+"\">"+sw+"</option>");
+	}
+}
+
+//根据select的值绘制交换机表格
+function addswtable() {
+	var title = $("#swselect").val();
+	$("div.swdiv").remove();
+	$("#tabs-4").append("<div class=\"swdiv\"></div>");
+	$("div.swdiv").append("<table class=\"swtable\"></table>");
+	addswcontent(title);
+}
+
+function addswcontent(group) {
+	if(group==="all"){
+		for(var sw in Switch){
+			addswcontent(sw);
+		}
+	}else{
+		$("table.swtable").append("<tr class=\"content\"><th colspan=\"5\">"+group+"</th></tr>");
+		$("table.swtable").append("<tr><td rowspan=\"2\">Switch Name</td><td rowspan=\"2\">IP Address</td><td colspan=\"3\">CPU Load</td></tr>");
+		$("table.swtable").append("<tr><td>过去5秒（峰值/平均）</td><td>过去1分钟</td><td>过去5分钟</td></tr>");
+		for(var swname in Switch[group]){
+			$("table.swtable").append("<tr class=\"ipadd\"><td>"+swname+"</td><td>"+Switch[group][swname]+"</td><td>-</td><td>-</td><td>-</td></tr>");
+		}
+	}
+}
+
+function teltoswitch(){
+	$(".ipadd").each(function() {
+		var ip=$(this).find("td").eq(1).text();
+		if (ip=="172.16.2.20"||ip=="172.16.201.238"||ip=="172.16.2.8"){
+			$(this).find("td").eq(2).text("非通用密码");
+			$(this).find("td").eq(3).text("非通用密码");
+			$(this).find("td").eq(4).text("非通用密码");
+		}else{
+			var ipdata={"ipaddress":ip};
+			var fives,onem,fivem;
+			$.ajax({
+				url:"telnet/teltosw.php",
+				type:"POST",
+				dataType:"json",
+				data:ipdata,
+				async:false,
+				success: function(data){
+					fives=data.fives;
+					onem=data.onem;
+					fivem=data.fivem;
+				}
+			});
+			$(this).find("td").eq(2).text(fives);
+			$(this).find("td").eq(3).text(onem);
+			$(this).find("td").eq(4).text(fivem);
+		}
+	});
+}
 
 //向后台服务器请求销售日历中的数据
 function searchsellcalendar(){
@@ -93,7 +166,7 @@ function searchsellcalendar(){
 			while (i<=endday){
 				if (j>1){
 					j=j-1;
-					$(".calendar:last").append('<td class="white"> </td>');
+					$(".calendar:last").append('<td> </td>');
 				}else if (weekj>7){
 					$("#sellcalendar").append('<tr class="calendar"></tr>');
 					$(".calendar:last").append('<td><span class="daynumber">'+i+'</span><br /><span class="sellmoney">'+json.sellmoney[i-1]+'</span><span class="sellplan">'+json.sellplan[i-1]+'</span></td>');
@@ -116,7 +189,7 @@ function ifhisempty (){
 	var d = date.getDate();
 	var y = date.getFullYear();
 	var m = date.getMonth() + 1;
-	if (($("#year").val() == y)&&($("month").val() == m)){
+	if (($("#year").val() == y)&&($("#month").val() == m)){
 		$("table#sellcalendar tr td").each(function(index, element) {
 			if (($(this).find("span.daynumber").text() < d)&&($(this).find("span.sellmoney").text() == "-")){
 			$(this).addClass("emptysell");

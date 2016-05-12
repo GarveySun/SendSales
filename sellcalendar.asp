@@ -3,7 +3,6 @@
 dim selldate(1)
 selldate(0)=request("year")
 selldate(1)=request("month")
-response.Write(selldate(1))
 if selldate(1)=1 or selldate(1)=3 or selldate(1)=5 or selldate(1)=7 or selldate(1)=8 or selldate(1)=10 or selldate(1)=12 then
     endday = 31
 elseif selldate(1)=2 then
