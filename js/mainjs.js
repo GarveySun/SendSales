@@ -138,6 +138,9 @@ function teltoswitch(){
 					fivem=data.fivem;
 				}
 			});
+			if (!fives||!onem||!fivem){
+				$(this).find("td").addClass("swOffLine");
+			}
 			$(this).find("td").eq(2).text(fives);
 			$(this).find("td").eq(3).text(onem);
 			$(this).find("td").eq(4).text(fivem);
